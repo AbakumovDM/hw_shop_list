@@ -20,4 +20,17 @@ with open("recipes.txt", encoding="UTF-8") as file:
       # print(ingredients)
       number += 1
       cook_book[dish] = ingredients
-  pprint(cook_book)
+  # pprint(cook_book)
+
+  def get_shop_list_by_dishes(dishes, person_count):
+    shop_list = {}
+    for dish in dishes:
+      for ingredient in cook_book[dish]:
+        if ingredient['ingredient_name'] not in shop_list.keys():
+          shop_list[ingredient['ingredient_name']] = {'measure': ingredient['measure'],
+                                                      'quantity': ingredient['quantity'] * person_count}
+        else:
+          shop_list[ingredient['ingredient_name']]['quantity'] += ingredient['quantity'] * person_count
+    pprint(shop_list)
+
+  get_shop_list_by_dishes(['Фахитос', 'Омлет'], 3)
